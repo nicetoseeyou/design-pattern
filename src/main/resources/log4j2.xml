@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="300">
+    <properties>
+        <property name="LOG_HOME">./logs</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %l - %msg%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="InfoFile"
+                                 fileName="${LOG_HOME}/info.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log"
+                                 immediateFlush="false"
+                                 append="false">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %l - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="ErrorFile"
+                                 fileName="${LOG_HOME}/error.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log"
+                                 immediateFlush="false"
+                                 append="false">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %l - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="FatalFile"
+                                 fileName="${LOG_HOME}/fatal.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/fatal-%d{yyyy-MM-dd}-%i.log"
+                                 immediateFlush="false"
+                                 append="false">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %l - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="com.dodo.lab" level="trace" includeLocation="true">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="InfoFile" />
+            <AppenderRef ref="ErrorFile" />
+            <AppenderRef ref="FatalFile" />
+        </AsyncLogger>
+        <Root level="info" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="InfoFile" />
+            <AppenderRef ref="ErrorFile" />
+            <AppenderRef ref="FatalFile" />
+        </Root>
+    </Loggers>
+</Configuration>

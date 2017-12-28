@@ -13,14 +13,74 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<slf4j.api.version>1.7.25</slf4j.api.version>
+		<log4j.version>2.10.0</log4j.version>
+		<disruptor.version>3.3.7</disruptor.version>
+		<junit.version>4.12</junit.version>
+		<javax.servlet-api.version>4.0.0</javax.servlet-api.version>
+		<jstl.version>1.2</jstl.version>
 	</properties>
 
 	<dependencies>
+		<!-- slf4j start -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.api.version}</version>
+		</dependency>
+		<!-- slf4j end -->
+
+		<!-- log4j2 start -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<!-- log4j2 end -->
+
+		<!-- slf4j bridge start -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<!-- slf4j bridge end -->
+
+		<!-- disruptor for log4j2 async start -->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>${disruptor.version}</version>
+		</dependency>
+		<!-- disruptor for log4j2 async end -->
+
+		<!-- junit start -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- junit end -->
+
+		<!-- servlet start -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- servlet end -->
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
 		</dependency>
 	</dependencies>
 </project>

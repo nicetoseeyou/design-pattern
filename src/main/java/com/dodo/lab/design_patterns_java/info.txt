@@ -1,0 +1,3 @@
+source code for e-book design pattern in java
+《设计模式 Java版》
+https://github.com/quanke/design-pattern-java-source-code
